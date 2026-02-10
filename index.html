@@ -1,31 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Lang -->
 <html lang="es">
-<!-- Head -->
-	<head>
-		<!-- Metadata -->
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="author" content="Bryan Espinoza" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<meta name="robots" content="index, follow" />
-		<meta name="og:title" content="" />
-		<meta name="og:description" content="" />
-		<meta name="og:image" content="" />
-		<meta name="og:type" content="" />
-		<meta name="og:url" content="" />
-		<!-- Css -->
-		<link rel="stylesheet" href="Css/style.css" />
-		<!-- Script -->
-		<script src="Js/main.js" defer></script>
-		<!-- Icon -->
-		<link rel="shortcut icon" href="Assets/" type="image/x-icon" />
-		<!-- Title -->
-		<title>DashboardApp</title>
-	</head>
-<!-- Body -->
-	<body>
+  <!-- Head -->
+  <head>
+    <!-- Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Bryan Espinoza" />
+    <meta
+      name="description"
+      content="Este proyecto es para practicar mi habilidades sobre Bootstrap y Sass"
+    />
+    <meta
+      name="keywords"
+      content="DashboardApp, 14BryanEspinoza, Bootstrap, Sass"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="og:title" content="DashboardApp | SPA" />
+    <meta
+      name="og:description"
+      content="DashboardApp es un proyecto para practicar mi habilidades sobre Bootstrap y Sass"
+    />
+    <meta name="og:image" content="" />
+    <meta name="og:type" content="website" />
+    <meta name="og:url" content="https://AdminDashboard14bz.netlify.app/" />
+    <!-- Tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-	</body>
+    <!-- Script -->
+    <script
+      src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <script src="Js/main.js" defer></script>
+    <!-- Css -->
+    <link rel="stylesheet" href="Css/style.css" />
+    <!-- Icon -->
+    <link rel="shortcut icon" href="Assets/icon.png" type="image/x-icon" />
+    <!-- Title -->
+    <title>DashboardApp</title>
+  </head>
+
+  <!-- Body -->
+  <body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg">
+      <!-- Container -->
+      <div class="container-fluid">
+        <!-- Logo -->
+        <a href="index.html" class="navbar-brand">DashboardApp</a>
+        <!-- Button Nav -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link active" aria-current="page"
+                >Panel de Control</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="inventory.html" class="nav-link">Inventario</a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">Ordenes</a>
+            </li>
+          </ul>
+          <!-- Date -->
+          <div>
+            <p id="date" class="navbar-date">00-00-00</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Main -->
+    <main></main>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>"Programa no para resolver problemas; sino para crear soluciones"</p>
+      <div class="footer__link">
+        <a href="https://github.com/14BryanEspinoza">GitHub</a>
+        <a href="https://www.linkedin.com/in/14bryanespinoza/">LinkedIn</a>
+      </div>
+      <p>Copyright &copy; 2026 - 14BryanEspinoza</p>
+    </footer>
+  </body>
 </html>

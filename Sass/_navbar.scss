@@ -1,0 +1,66 @@
+// Imports
+@use 'variables';
+@use 'mixins';
+
+// Style Mobile
+.navbar {
+  @include mixins.sticky-top($top: 0, $z-index: 5);
+  padding: 0.5rem 0;
+  border-bottom: 2px solid variables.$border-color;
+  background-color: variables.$background-subtle;
+
+  //Container
+  .container-fluid {
+    // Logo
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      color: variables.$text-default;
+    }
+
+    //Button Nav
+    .navbar-toggler {
+      font-size: 0.8rem;
+    }
+
+    .navbar-toggler:focus {
+      outline: none;
+      box-shadow: none;
+      border: 2px solid variables.$border-hover-color;
+    }
+
+    // Links
+    .navbar-collapse {
+      .navbar-nav {
+        text-align: center;
+        font-size: 0.8rem;
+        margin: 0.8rem;
+        padding: 0.2rem;
+        border-top: 2px solid variables.$border-color;
+
+        .nav-link {
+          color: variables.$text-muted;
+        }
+
+        .nav-link:hover {
+          color: variables.$text-secondary;
+        }
+
+        .nav-link.active {
+          font-weight: bold;
+          color: variables.$text-secondary;
+        }
+      }
+
+      // Date
+      .navbar-date {
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        color: variables.$text-muted;
+      }
+    }
+  }
+}

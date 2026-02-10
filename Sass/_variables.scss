@@ -1,1 +1,36 @@
-// Variables Personalizadas
+// Typography
+$font-family: 'Inter', sans-serif;
+
+// Brand
+$primary: #2563eb;
+$secondary: #64748b;
+
+// Backgrounds
+$background-default: #f8fafc;
+$background-card: #ffffff;
+$background-subtle: #f1f5f9;
+$background-soft: #e0f2fe;
+$background-dark: #0f172a;
+
+// Text colors
+$text-default: #0f172a;
+$text-secondary: #475569;
+$text-muted: #94a3b8;
+
+// Border Colors
+$border-color: #e2e8f0;
+$border-hover-color: #d1d5db;
+
+// Shadow colors
+$shadow-default: rgba(90, 105, 120, 0.1);
+$shadow-hover: rgba(90, 105, 120, 0.25);
+
+// States
+$success: #16a34a;
+$warning: #f59e0b;
+$danger: #dc2626;
+$info: #0ea5e9;
+
+// Links
+$link-color: $primary;
+$link-hover-color: #1e40af;

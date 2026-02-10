@@ -1,2 +1,14 @@
-@import "variables";
-@import "bootstrap";
+// Imports
+@use 'variables';
+@forward 'bootstrap';
+@forward 'navbar';
+
+// Global
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: variables.$font-family;
+  background-color: variables.$background-default;
+}
