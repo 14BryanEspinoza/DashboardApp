@@ -1,0 +1,21 @@
+{
+  "name": "DashboardApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sass Sass/style.scss Css/style.css",
+    "watch": "sass --watch Sass/style.scss:Css/style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.1",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}
