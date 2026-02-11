@@ -11901,11 +11901,106 @@ textarea.form-control-lg {
 .navbar .container-fluid .navbar-collapse .navbar-date {
   text-align: center;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   letter-spacing: 1px;
-  color: #94a3b8;
+  color: #475569;
 }
 
+@media screen and (min-width: 1024px) {
+  .navbar {
+    width: 20%;
+    height: 97dvh;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: 2px 0 2px rgba(90, 105, 120, 0.1);
+  }
+  .navbar .container-fluid {
+    flex-direction: column;
+    height: 95%;
+  }
+  .navbar .container-fluid .navbar-brand {
+    transition: all 0.3s ease-in-out;
+  }
+  .navbar .container-fluid .navbar-brand:hover {
+    text-decoration: underline;
+    transform: scale(1.1);
+    color: #2563eb;
+  }
+  .navbar .container-fluid .navbar-collapse {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar .container-fluid .navbar-collapse .navbar-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item {
+    transition: all 0.3s ease-in-out;
+  }
+  .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item:hover {
+    transform: scale(1.1);
+  }
+  .navbar .container-fluid .navbar-collapse .navbar-nav .nav-item:hover a {
+    color: #2563eb;
+  }
+  .navbar .container-fluid .navbar-collapse .navbar-date {
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    border-bottom: 0;
+  }
+}
+.footer {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f1f5f9;
+}
+.footer p {
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+.footer p:first-child {
+  font-style: italic;
+  font-family: cursive;
+  font-size: 1rem;
+}
+.footer .footer__link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.footer .footer__link a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #475569;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 20px;
+    bottom: 6px;
+    width: 75%;
+    height: auto;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: 2px 0 2px rgba(90, 105, 120, 0.1);
+  }
+}
 html {
   scroll-behavior: smooth;
 }

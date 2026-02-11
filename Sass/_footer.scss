@@ -1,0 +1,49 @@
+// Imports
+@use 'variables';
+@use 'mixins';
+
+// Style Mobile
+.footer {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: variables.$background-subtle;
+
+  p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+  }
+
+  p:first-child {
+    font-style: italic;
+    font-family: cursive;
+    font-size: 1rem;
+  }
+
+  .footer__link {
+    @include mixins.display-flex(
+      $display: flex,
+      $justify-content: center,
+      $gap: 1rem
+    );
+    margin: 1.5rem 0;
+
+    a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      color: variables.$text-secondary;
+    }
+  }
+}
+
+// Style Desktop
+@media screen and (min-width: 768px) {
+  .footer {
+    @include mixins.position-absolute($right: 20px, $bottom: 6px, $width: 75%);
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid variables.$border-color;
+    box-shadow: 2px 0 2px variables.$shadow-default;
+  }
+}
