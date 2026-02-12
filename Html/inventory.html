@@ -37,7 +37,7 @@
       src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
-    <script src="../Js/main.js" defer></script>
+    <script type="module" src="../Js/main.js" defer></script>
     <!-- Css -->
     <link rel="stylesheet" href="../Css/style.css" />
     <!-- Icon -->
@@ -92,6 +92,110 @@
       </div>
     </nav>
     <!-- Main -->
-    <main></main>
+    <main>
+      <!-- Formulario para Productos -->
+      <div class="containerFrom">
+        <!-- Container Title -->
+        <div class="tittle-container">
+          <!-- Title -->
+          <h2>Agregar Productos</h2>
+          <!-- Button Add -->
+          <button
+            class="add-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#addForm"
+            aria-controls="addForm"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            +
+          </button>
+        </div>
+        <!-- Formulario -->
+        <div id="addForm" class="fromProduct collapse">
+          <form action="#" class="form">
+            <!-- Name  -->
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="productInput"
+                required
+                maxlength="20"
+                placeholder="Nombre del Producto"
+                aria-label="Nombre del Producto"
+              />
+              <label for="productInput">Nombre del Producto</label>
+            </div>
+            <!-- Category  -->
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="categoryInput"
+                required
+                maxlength="20"
+                placeholder="Nombre de la Categoría"
+                aria-label="Nombre de la Categoría"
+              />
+              <label for="categoryInput">Nombre de la Categoría</label>
+            </div>
+            <!-- Stock  -->
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="stockInput"
+                required
+                maxlength="20"
+                placeholder="Cantidad de Stock"
+                aria-label="Cantidad de Stock"
+              />
+              <label for="stockInput">Stock</label>
+            </div>
+            <!-- Price  -->
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="priceInput"
+                required
+                maxlength="20"
+                placeholder="Precio del Producto"
+                aria-label="Precio del Producto"
+              />
+              <label for="priceInput">Precio del Producto</label>
+            </div>
+            <!-- Button  -->
+            <button type="submit" class="btn">Agregar</button>
+          </form>
+        </div>
+      </div>
+      <!-- Lista de Productos -->
+      <div class="products container-fluid">
+        <!-- Filtro -->
+        <div class="container-filter">
+          <form action="#" id="filterForm">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="filterInput"
+                aria-label="Buscar"
+                placeholder="Buscar"
+                required
+                maxlength="20"
+              />
+              <label for="filterInput">Buscar</label>
+            </div>
+            <button type="submit" class="btn">Buscar</button>
+          </form>
+        </div>
+        <!-- Productos -->
+        <div id="products" class="products"></div>
+        <!-- Pagination -->
+      </div>
+    </main>
   </body>
 </html>

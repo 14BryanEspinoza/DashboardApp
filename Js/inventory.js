@@ -1,0 +1,135 @@
+// Constantes
+export const initInventory = () => {
+  const addFrom = document.getElementById('addForm')
+  const productsContainer = document.getElementById('products')
+  const STORAGE_KEYS = 'products'
+  const windowSize = window.innerWidth
+
+  // Cargar Productos del localStorage
+  const loadProduct = () => {
+    const item = localStorage.getItem(STORAGE_KEYS)
+
+    // Si no hay colección, retorna un array vacío
+    if (!item) return []
+
+    try {
+      // Si el JSON es válido, retorna el array
+      return JSON.parse(item)
+    } catch (e) {
+      // Si el JSON se daña, retorna un array vacío
+      return []
+    }
+  }
+
+  // Guardar Productos en el localStorage
+  const saveProduct = (products) => {
+    localStorage.setItem(STORAGE_KEYS, JSON.stringify(products))
+  }
+
+  // Renderizado de Productos
+  const renderProducts = () => {
+    // Limpiamos el contenedor
+    productsContainer.innerHTML = ''
+
+    // Creamos los componentes de la card
+    products.forEach((product) => {
+      const divCard = document.createElement('div')
+      const divCardHeader = document.createElement('div')
+      const divCardBody = document.createElement('div')
+      const divCardFooter = document.createElement('div')
+      const btnDelete = document.createElement('button')
+      const title = document.createElement('h2')
+      const category = document.createElement('p')
+      const stock = document.createElement('p')
+      const price = document.createElement('span')
+
+      title.textContent = product.name
+      category.textContent = `Categoría: ${product.category}`
+      stock.textContent = `Cantidad: ${product.stock}`
+      price.textContent = `$${product.price}`
+      btnDelete.textContent = 'Eliminar'
+
+      divCard.className = 'card'
+      divCardHeader.className = 'card-header'
+      divCardBody.className = 'card-body'
+      divCardFooter.className = 'card-footer'
+      btnDelete.className = 'btn btn-danger'
+
+      btnDelete.addEventListener('click', () => removeProduct(product.id))
+
+      divCardHeader.appendChild(title)
+      divCardHeader.appendChild(price)
+      divCardBody.appendChild(stock)
+      divCardBody.appendChild(category)
+      divCardFooter.appendChild(btnDelete)
+      divCard.appendChild(divCardHeader)
+      divCard.appendChild(divCardBody)
+      divCard.appendChild(divCardFooter)
+
+      productsContainer.appendChild(divCard)
+    })
+  }
+
+  // Eliminar Productos del localStorage
+  const removeProduct = (id) => {
+    // Seleccionamos todos los productos menos el que queremos eliminar
+    products = products.filter((item) => item.id !== id)
+
+    saveProduct(products)
+    renderProducts()
+  }
+
+  // Agregar Productos en el localStorage
+  const addProduct = (name, category, stock, price) => {
+    // Verificamos si existe el producto
+    const existingProducts = products.find((item) => item.name === name)
+
+    if (existingProducts) {
+      // Si existe, actualizamos el producto
+      existingProducts.category = category
+      existingProducts.stock += stock
+      existingProducts.price = price
+    } else {
+      // Sino existe, Creamos el nuevo producto
+      const newProduct = { id: Date.now(), name, category, stock, price }
+
+      // Agregar el nuevo producto
+      products.push(newProduct)
+    }
+
+    saveProduct(products)
+  }
+
+  // Obtenemos los datos del formulario
+  addFrom.addEventListener('submit', function (e) {
+    // Impide la recarga de la pagina
+    e.preventDefault()
+
+    // Datos del Producto
+    const name = document.getElementById('productInput').value
+    const category = document.getElementById('categoryInput').value
+    const stock = document.getElementById('stockInput').value
+    const price = document.getElementById('priceInput').value
+
+    // Agregamos el producto
+    addProduct(name, category, stock, price)
+    renderProducts()
+
+    // Limpiamos el formulario
+    document.getElementById('productInput').value = ''
+    document.getElementById('categoryInput').value = ''
+    document.getElementById('stockInput').value = ''
+    document.getElementById('priceInput').value = ''
+  })
+
+  // Media Queries
+  if (windowSize >= 1024) {
+    addFrom.classList.add('show')
+  } else {
+    addFrom.classList.remove('show')
+  }
+
+  // Inicializamos
+  let products = loadProduct()
+  renderProducts()
+}

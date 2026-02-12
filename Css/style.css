@@ -11956,6 +11956,154 @@ textarea.form-control-lg {
     border-bottom: 0;
   }
 }
+.containerFrom {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border-top: 2px solid #e2e8f0;
+  border-bottom: 2px solid #e2e8f0;
+  background-color: #ffffff;
+}
+.containerFrom .tittle-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.containerFrom .tittle-container h2 {
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: 0;
+}
+.containerFrom .tittle-container .add-toggler {
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  color: #fff;
+  border: 2px solid #2563eb;
+  background-color: #2563eb;
+}
+.containerFrom .tittle-container .add-toggler:hover {
+  background-color: #2563eb;
+}
+.containerFrom .fromProduct {
+  margin-top: 0.5rem;
+}
+.containerFrom .fromProduct .form {
+  text-align: center;
+}
+.containerFrom .fromProduct .form .form-floating {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.containerFrom .fromProduct .form .form-floating .form-control {
+  min-height: auto;
+  height: auto;
+  padding: 0.5rem;
+}
+.containerFrom .fromProduct .form .form-floating .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #2563eb;
+}
+.containerFrom .fromProduct .form .form-floating .form-control:invalid {
+  border-color: #dc2626;
+}
+.containerFrom .fromProduct .form .form-floating label {
+  font-size: 0.8rem;
+  padding: 0.5rem;
+}
+.containerFrom .fromProduct .form button {
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #475569;
+}
+
+@media screen and (min-width: 1024px) {
+  .containerFrom {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    bottom: auto;
+    width: 15%;
+    height: 40dvh;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: 2px 0 2px rgba(90, 105, 120, 0.1);
+  }
+  .containerFrom .tittle-container {
+    margin-top: 0.5rem;
+  }
+  .containerFrom .tittle-container .add-toggler {
+    display: none;
+  }
+  .containerFrom .fromProduct .form button:hover {
+    background-color: #2563eb;
+  }
+}
+.products .container-filter form {
+  display: flex;
+  gap: 0.5rem;
+}
+.products .container-filter form .form-floating {
+  font-size: 0.8rem;
+}
+.products .container-filter form .form-floating .form-control {
+  min-height: auto;
+  height: auto;
+  padding: 0.5rem;
+}
+.products .container-filter form .form-floating .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #2563eb;
+}
+.products .container-filter form .form-floating .form-control:invalid {
+  border-color: #dc2626;
+}
+.products .container-filter form .form-floating label {
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+.products .container-filter form button {
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #475569;
+}
+
+@media screen and (min-width: 1024px) {
+  .products .container-filter form {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .products .container-filter form .form-floating {
+    font-size: 0.8rem;
+  }
+  .products .container-filter form .form-floating .form-control {
+    min-height: auto;
+    height: auto;
+    padding: 0.5rem;
+  }
+  .products .container-filter form .form-floating .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #2563eb;
+  }
+  .products .container-filter form .form-floating .form-control:invalid {
+    border-color: #dc2626;
+  }
+  .products .container-filter form .form-floating label {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .products .container-filter form button {
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #475569;
+  }
+}
 .footer {
   text-align: center;
   margin-top: 0.5rem;
@@ -11999,6 +12147,13 @@ textarea.form-control-lg {
     border-radius: 0.5rem;
     border: 2px solid #e2e8f0;
     box-shadow: 2px 0 2px rgba(90, 105, 120, 0.1);
+  }
+  .footer .footer__link a {
+    transition: all 0.3s ease-in-out;
+  }
+  .footer .footer__link a:hover {
+    transform: scale(1.1);
+    color: #2563eb;
   }
 }
 html {

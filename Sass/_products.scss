@@ -1,0 +1,99 @@
+// Import
+@use 'variables';
+@use 'mixins';
+
+// Style Mobile
+.products {
+  // Container Filter
+  .container-filter {
+    // Form
+    form {
+      display: flex;
+      gap: 0.5rem;
+
+      // Container Input
+      .form-floating {
+        font-size: 0.8rem;
+
+        // Input
+        .form-control {
+          min-height: auto;
+          height: auto;
+          padding: 0.5rem;
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: variables.$primary;
+          }
+
+          &:invalid {
+            border-color: variables.$danger;
+          }
+        }
+
+        // Label
+        label {
+          padding: 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      // Button Submit
+      button {
+        font-size: 0.8rem;
+        color: #fff;
+        background-color: variables.$text-secondary;
+      }
+    }
+  }
+}
+
+// Style Desktop
+@media screen and (min-width: 1024px) {
+  .products {
+    // Container Filter
+    .container-filter {
+      // Form
+      form {
+        display: flex;
+        gap: 0.5rem;
+
+        // Container Input
+        .form-floating {
+          font-size: 0.8rem;
+
+          // Input
+          .form-control {
+            min-height: auto;
+            height: auto;
+            padding: 0.5rem;
+
+            &:focus {
+              outline: none;
+              box-shadow: none;
+              border-color: variables.$primary;
+            }
+
+            &:invalid {
+              border-color: variables.$danger;
+            }
+          }
+
+          // Label
+          label {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+          }
+        }
+
+        // Button Submit
+        button {
+          font-size: 0.8rem;
+          color: #fff;
+          background-color: variables.$text-secondary;
+        }
+      }
+    }
+  }
+}

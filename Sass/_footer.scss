@@ -12,12 +12,12 @@
   p {
     font-size: 0.8rem;
     margin-bottom: 0;
-  }
 
-  p:first-child {
-    font-style: italic;
-    font-family: cursive;
-    font-size: 1rem;
+    &:first-child {
+      font-style: italic;
+      font-family: cursive;
+      font-size: 1rem;
+    }
   }
 
   .footer__link {
@@ -45,5 +45,17 @@
     border-radius: 0.5rem;
     border: 2px solid variables.$border-color;
     box-shadow: 2px 0 2px variables.$shadow-default;
+
+    // Links
+    .footer__link {
+      a {
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+          color: variables.$primary;
+        }
+      }
+    }
   }
 }

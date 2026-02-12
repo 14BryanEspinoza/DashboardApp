@@ -1,0 +1,123 @@
+// Imports
+@use 'variables';
+@use 'mixins';
+
+// Style Mobile
+.containerFrom {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border-top: 2px solid variables.$border-color;
+  border-bottom: 2px solid variables.$border-color;
+  background-color: variables.$background-card;
+
+  // Container Tittle
+  .tittle-container {
+    @include mixins.display-flex($display: flex, $gap: 0.5rem);
+
+    // Tittle
+    h2 {
+      font-weight: bold;
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    // Button Add
+    .add-toggler {
+      padding: 0.1rem 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      color: #fff;
+      border: 2px solid variables.$primary;
+      background-color: variables.$primary;
+
+      &:hover {
+        background-color: variables.$primary;
+      }
+    }
+  }
+
+  // Container
+  .fromProduct {
+    margin-top: 0.5rem;
+
+    // Formulario
+    .form {
+      text-align: center;
+
+      // Container Input
+      .form-floating {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+
+        // Input
+        .form-control {
+          min-height: auto;
+          height: auto;
+          padding: 0.5rem;
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: variables.$primary;
+          }
+
+          &:invalid {
+            border-color: variables.$danger;
+          }
+        }
+
+        // Label
+        label {
+          font-size: 0.8rem;
+          padding: 0.5rem;
+        }
+      }
+
+      // Button Submit
+      button {
+        font-size: 0.8rem;
+        color: #fff;
+        background-color: variables.$text-secondary;
+      }
+    }
+  }
+}
+
+// Style Desktop
+@media screen and (min-width: 1024px) {
+  .containerFrom {
+    @include mixins.position-absolute(
+      $top: 0,
+      $right: 0,
+      $width: 15%,
+      $height: 40dvh
+    );
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid variables.$border-color;
+    box-shadow: 2px 0 2px variables.$shadow-default;
+
+    // Container Tittle
+    .tittle-container {
+      margin-top: 0.5rem;
+
+      // Button Add
+      .add-toggler {
+        display: none;
+      }
+    }
+
+    // Container
+    .fromProduct {
+      // Formulario
+      .form {
+        // Button Submit
+        button {
+          &:hover {
+            background-color: variables.$primary;
+          }
+        }
+      }
+    }
+  }
+}

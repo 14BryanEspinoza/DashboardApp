@@ -22,12 +22,12 @@
     //Button Nav
     .navbar-toggler {
       font-size: 0.8rem;
-    }
 
-    .navbar-toggler:focus {
-      outline: none;
-      box-shadow: none;
-      border: 2px solid variables.$border-hover-color;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        border: 2px solid variables.$border-hover-color;
+      }
     }
 
     // Links
@@ -43,15 +43,15 @@
         // Li
         .nav-link {
           color: variables.$text-muted;
-        }
 
-        .nav-link:hover {
-          color: variables.$text-secondary;
-        }
+          &:hover {
+            color: variables.$text-secondary;
+          }
 
-        .nav-link.active {
-          font-weight: bold;
-          color: variables.$text-secondary;
+          &.active {
+            font-weight: bold;
+            color: variables.$text-secondary;
+          }
         }
       }
 
@@ -85,12 +85,12 @@
       // Logo
       .navbar-brand {
         transition: all 0.3s ease-in-out;
-      }
 
-      .navbar-brand:hover {
-        text-decoration: underline;
-        transform: scale(1.1);
-        color: variables.$primary;
+        &:hover {
+          text-decoration: underline;
+          transform: scale(1.1);
+          color: variables.$primary;
+        }
       }
 
       // Links
@@ -107,14 +107,14 @@
           // Li
           .nav-item {
             transition: all 0.3s ease-in-out;
-          }
 
-          .nav-item:hover {
-            transform: scale(1.1);
-          }
+            &:hover {
+              transform: scale(1.1);
+            }
 
-          .nav-item:hover a {
-            color: variables.$primary;
+            &:hover a {
+              color: variables.$primary;
+            }
           }
         }
 
