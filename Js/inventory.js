@@ -1,6 +1,7 @@
 // Constantes
 export const initInventory = () => {
   const addFrom = document.getElementById('addForm')
+  const filterForm = document.getElementById('filterForm')
   const productsContainer = document.getElementById('products')
   const STORAGE_KEYS = 'products'
   const windowSize = window.innerWidth
@@ -27,12 +28,12 @@ export const initInventory = () => {
   }
 
   // Renderizado de Productos
-  const renderProducts = () => {
+  const renderProducts = (list = products) => {
     // Limpiamos el contenedor
     productsContainer.innerHTML = ''
 
     // Creamos los componentes de la card
-    products.forEach((product) => {
+    list.forEach((product) => {
       const divCard = document.createElement('div')
       const divCardHeader = document.createElement('div')
       const divCardBody = document.createElement('div')
@@ -68,6 +69,26 @@ export const initInventory = () => {
 
       productsContainer.appendChild(divCard)
     })
+  }
+
+  // Filtrar Productos
+  const filterProducts = (filterValue) => {
+    // Convertimos el valor del filtro a minúsculas
+    const query = (filterValue ?? '').trim().toLowerCase()
+
+    // Si no hay filtro, renderiza todos los productos
+    if (!query) {
+      renderProducts()
+      return
+    }
+
+    // Filtramos los productos que coincidan con el filtro
+    const filtered = products.filter((item) => {
+      const name = (item.name ?? '').toString().toLowerCase()
+      return name.includes(query)
+    })
+
+    renderProducts(filtered)
   }
 
   // Eliminar Productos del localStorage
@@ -120,6 +141,18 @@ export const initInventory = () => {
     document.getElementById('categoryInput').value = ''
     document.getElementById('stockInput').value = ''
     document.getElementById('priceInput').value = ''
+  })
+
+  // Filtrar Productos
+  filterForm.addEventListener('submit', function (e) {
+    // Impide la recarga de la pagina
+    e.preventDefault()
+
+    // Obtenemos el valor del filtro
+    const filterValue = document.getElementById('filterInput').value
+
+    // Filtramos los productos
+    filterProducts(filterValue)
   })
 
   // Media Queries

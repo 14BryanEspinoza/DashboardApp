@@ -3,7 +3,7 @@
 @use 'mixins';
 
 // Style Mobile
-.products {
+.container-products {
   // Container Filter
   .container-filter {
     // Form
@@ -47,22 +47,74 @@
       }
     }
   }
+
+  // Lista de Productos
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin: 0.5rem;
+    margin-top: 1rem;
+
+    .card {
+      &-header {
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+          font-weight: bold;
+          font-size: 0.8rem;
+          margin: 0;
+        }
+
+        span {
+          font-size: 0.7rem;
+        }
+      }
+
+      &-body {
+        p {
+          margin: 0;
+          font-size: 0.8rem;
+        }
+      }
+
+      &-footer {
+        text-align: center;
+
+        .btn {
+          font-size: 0.8rem;
+          border: 1px solid variables.$warning;
+          background-color: variables.$warning;
+        }
+      }
+    }
+  }
 }
 
 // Style Desktop
 @media screen and (min-width: 1024px) {
-  .products {
+  .container-products {
+    @include mixins.position-absolute(
+      $top: 0,
+      $left: 21%,
+      $width: 62%,
+      $height: 97dvh
+    );
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid variables.$border-color;
+    box-shadow: 2px 0 2px variables.$shadow-default;
+
     // Container Filter
     .container-filter {
       // Form
       form {
-        display: flex;
-        gap: 0.5rem;
+        @include mixins.display-flex(row, center, center, wrap, 0.5rem);
 
         // Container Input
         .form-floating {
-          font-size: 0.8rem;
-
           // Input
           .form-control {
             min-height: auto;
@@ -92,6 +144,32 @@
           font-size: 0.8rem;
           color: #fff;
           background-color: variables.$text-secondary;
+
+          &:hover {
+            background-color: variables.$primary;
+          }
+        }
+      }
+    }
+
+    // Lista de Productos
+    .products {
+      overflow-y: scroll;
+      max-height: 80vh;
+
+      .card {
+        &-header {
+          h2 {
+            width: 50%;
+          }
+        }
+
+        &-footer {
+          .btn {
+            &:hover {
+              background-color: variables.$danger;
+            }
+          }
         }
       }
     }

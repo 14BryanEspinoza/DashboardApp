@@ -53,7 +53,8 @@
         .form-control {
           min-height: auto;
           height: auto;
-          padding: 0.5rem;
+          font-size: 0.8rem;
+          padding: 0.8rem 0.5rem;
 
           &:focus {
             outline: none;
@@ -90,7 +91,7 @@
       $top: 0,
       $right: 0,
       $width: 15%,
-      $height: 40dvh
+      $height: 45dvh
     );
     margin: 0.5rem;
     border-radius: 0.5rem;

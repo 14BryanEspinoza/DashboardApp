@@ -11999,7 +11999,8 @@ textarea.form-control-lg {
 .containerFrom .fromProduct .form .form-floating .form-control {
   min-height: auto;
   height: auto;
-  padding: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.8rem 0.5rem;
 }
 .containerFrom .fromProduct .form .form-floating .form-control:focus {
   outline: none;
@@ -12027,7 +12028,7 @@ textarea.form-control-lg {
     right: 0;
     bottom: auto;
     width: 15%;
-    height: 40dvh;
+    height: 45dvh;
     margin: 0.5rem;
     border-radius: 0.5rem;
     border: 2px solid #e2e8f0;
@@ -12043,65 +12044,123 @@ textarea.form-control-lg {
     background-color: #2563eb;
   }
 }
-.products .container-filter form {
+.container-products .container-filter form {
   display: flex;
   gap: 0.5rem;
 }
-.products .container-filter form .form-floating {
+.container-products .container-filter form .form-floating {
   font-size: 0.8rem;
 }
-.products .container-filter form .form-floating .form-control {
+.container-products .container-filter form .form-floating .form-control {
   min-height: auto;
   height: auto;
   padding: 0.5rem;
 }
-.products .container-filter form .form-floating .form-control:focus {
+.container-products .container-filter form .form-floating .form-control:focus {
   outline: none;
   box-shadow: none;
   border-color: #2563eb;
 }
-.products .container-filter form .form-floating .form-control:invalid {
+.container-products .container-filter form .form-floating .form-control:invalid {
   border-color: #dc2626;
 }
-.products .container-filter form .form-floating label {
+.container-products .container-filter form .form-floating label {
   padding: 0.5rem;
   font-size: 0.8rem;
 }
-.products .container-filter form button {
+.container-products .container-filter form button {
   font-size: 0.8rem;
   color: #fff;
   background-color: #475569;
 }
+.container-products .products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin: 0.5rem;
+  margin-top: 1rem;
+}
+.container-products .products .card-header {
+  display: flex;
+  justify-content: space-between;
+}
+.container-products .products .card-header h2 {
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: 0;
+}
+.container-products .products .card-header span {
+  font-size: 0.7rem;
+}
+.container-products .products .card-body p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+.container-products .products .card-footer {
+  text-align: center;
+}
+.container-products .products .card-footer .btn {
+  font-size: 0.8rem;
+  border: 1px solid #f59e0b;
+  background-color: #f59e0b;
+}
 
 @media screen and (min-width: 1024px) {
-  .products .container-filter form {
-    display: flex;
+  .container-products {
+    position: absolute;
+    top: 0;
+    left: 21%;
+    right: auto;
+    bottom: auto;
+    width: 62%;
+    height: 97dvh;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: 2px 0 2px rgba(90, 105, 120, 0.1);
+  }
+  .container-products .container-filter form {
+    display: row;
+    flex-direction: center;
+    justify-content: center;
+    align-items: wrap;
     gap: 0.5rem;
   }
-  .products .container-filter form .form-floating {
-    font-size: 0.8rem;
-  }
-  .products .container-filter form .form-floating .form-control {
+  .container-products .container-filter form .form-floating .form-control {
     min-height: auto;
     height: auto;
     padding: 0.5rem;
   }
-  .products .container-filter form .form-floating .form-control:focus {
+  .container-products .container-filter form .form-floating .form-control:focus {
     outline: none;
     box-shadow: none;
     border-color: #2563eb;
   }
-  .products .container-filter form .form-floating .form-control:invalid {
+  .container-products .container-filter form .form-floating .form-control:invalid {
     border-color: #dc2626;
   }
-  .products .container-filter form .form-floating label {
+  .container-products .container-filter form .form-floating label {
     padding: 0.5rem;
     font-size: 0.8rem;
   }
-  .products .container-filter form button {
+  .container-products .container-filter form button {
     font-size: 0.8rem;
     color: #fff;
     background-color: #475569;
+  }
+  .container-products .container-filter form button:hover {
+    background-color: #2563eb;
+  }
+  .container-products .products {
+    overflow-y: scroll;
+    max-height: 80vh;
+  }
+  .container-products .products .card-header h2 {
+    width: 50%;
+  }
+  .container-products .products .card-footer .btn:hover {
+    background-color: #dc2626;
   }
 }
 .footer {
@@ -12158,6 +12217,7 @@ textarea.form-control-lg {
 }
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 body {
