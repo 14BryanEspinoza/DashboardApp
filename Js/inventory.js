@@ -1,31 +1,32 @@
 // Constantes
+const STORAGE_KEYS = 'products'
+
+// Cargar Productos del localStorage
+export const loadProduct = () => {
+  const item = localStorage.getItem(STORAGE_KEYS)
+
+  // Si no hay colección, retorna un array vacío
+  if (!item) return []
+
+  try {
+    // Si el JSON es válido, retorna el array
+    return JSON.parse(item)
+  } catch (e) {
+    // Si el JSON se daña, retorna un array vacío
+    return []
+  }
+}
+
+// Guardar Productos en el localStorage
+export const saveProduct = (products) => {
+  localStorage.setItem(STORAGE_KEYS, JSON.stringify(products))
+}
+
 export const initInventory = () => {
   const addFrom = document.getElementById('addForm')
   const filterForm = document.getElementById('filterForm')
   const productsContainer = document.getElementById('products')
-  const STORAGE_KEYS = 'products'
   const windowSize = window.innerWidth
-
-  // Cargar Productos del localStorage
-  const loadProduct = () => {
-    const item = localStorage.getItem(STORAGE_KEYS)
-
-    // Si no hay colección, retorna un array vacío
-    if (!item) return []
-
-    try {
-      // Si el JSON es válido, retorna el array
-      return JSON.parse(item)
-    } catch (e) {
-      // Si el JSON se daña, retorna un array vacío
-      return []
-    }
-  }
-
-  // Guardar Productos en el localStorage
-  const saveProduct = (products) => {
-    localStorage.setItem(STORAGE_KEYS, JSON.stringify(products))
-  }
 
   // Renderizado de Productos
   const renderProducts = (list = products) => {
@@ -91,15 +92,6 @@ export const initInventory = () => {
     renderProducts(filtered)
   }
 
-  // Eliminar Productos del localStorage
-  const removeProduct = (id) => {
-    // Seleccionamos todos los productos menos el que queremos eliminar
-    products = products.filter((item) => item.id !== id)
-
-    saveProduct(products)
-    renderProducts()
-  }
-
   // Agregar Productos en el localStorage
   const addProduct = (name, category, stock, price) => {
     // Verificamos si existe el producto
@@ -108,17 +100,32 @@ export const initInventory = () => {
     if (existingProducts) {
       // Si existe, actualizamos el producto
       existingProducts.category = category
-      existingProducts.stock += stock
-      existingProducts.price = price
+      existingProducts.stock = Number(existingProducts.stock) + Number(stock)
+      existingProducts.price = Number(price)
     } else {
       // Sino existe, Creamos el nuevo producto
-      const newProduct = { id: Date.now(), name, category, stock, price }
+      const newProduct = {
+        id: Date.now(),
+        name,
+        category,
+        stock: Number(stock),
+        price: Number(price),
+      }
 
       // Agregar el nuevo producto
       products.push(newProduct)
     }
 
     saveProduct(products)
+  }
+
+  // Eliminar Productos del localStorage
+  const removeProduct = (id) => {
+    // Seleccionamos todos los productos menos el que queremos eliminar
+    products = products.filter((item) => item.id !== id)
+
+    saveProduct(products)
+    renderProducts()
   }
 
   // Obtenemos los datos del formulario

@@ -89,6 +89,104 @@
       </div>
     </nav>
     <!-- Main -->
-    <main></main>
+    <main>
+      <!-- Formulario de Ordenes -->
+      <div class="containerFrom containerFromOrder">
+        <!-- Container Title -->
+        <div class="tittle-container">
+          <!-- Title -->
+          <h2>Agregar Nueva Orden</h2>
+          <!-- Button Add -->
+          <button
+            class="add-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#addOrderForm"
+            aria-controls="addOrderForm"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            +
+          </button>
+        </div>
+        <!-- Formulario -->
+        <div id="addOrderForm" class="formOrder collapse">
+          <form action="#" class="form">
+            <!-- Name Cliente  -->
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="clientInput"
+                required
+                maxlength="50"
+                placeholder="Nombre del cliente"
+                aria-label="Nombre del cliente"
+              />
+              <label for="productInput">Nombre del Cliente</label>
+            </div>
+            <!-- Item Product -->
+            <div class="form-floating">
+              <select
+                class="form-select"
+                id="itemInput"
+                aria-label="Select Producto"
+              >
+                <option value="" selected disabled>
+                  Seleccione un producto
+                </option>
+              </select>
+            </div>
+            <!-- Stock  -->
+            <div class="form-floating">
+              <input
+                type="number"
+                class="form-control"
+                id="stockInput"
+                required
+                maxlength="50"
+                placeholder="Cantidad Total"
+                aria-label="Cantidad Total"
+              />
+              <label for="stockInput">Cantidad Total</label>
+            </div>
+            <!-- Price  -->
+            <div class="form-floating">
+              <input
+                type="number"
+                class="form-control"
+                id="priceProductInput"
+                required
+                maxlength="50"
+                placeholder="Precio del Producto"
+                aria-label="Precio del Producto"
+                disabled
+              />
+              <label for="priceProductInput">Precio del Producto</label>
+            </div>
+            <!-- Total Price  -->
+            <div class="form-floating">
+              <input
+                type="number"
+                class="form-control"
+                id="totalPriceInput"
+                required
+                maxlength="50"
+                placeholder="Precio Total"
+                aria-label="Precio Total"
+                disabled
+              />
+              <label for="totalPriceInput">Precio Total</label>
+            </div>
+            <!-- Button  -->
+            <button type="submit" class="btn">Agregar</button>
+          </form>
+        </div>
+      </div>
+      <!-- Lista de Ordenes -->
+      <div class="container-products container-fluid">
+        <div id="orders" class="products"></div>
+      </div>
+    </main>
   </body>
 </html>

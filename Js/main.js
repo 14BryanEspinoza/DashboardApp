@@ -1,9 +1,11 @@
 import { initInventory } from './inventory.js'
+import { initOrders } from './orders.js'
 
 // Constantes
 const date = document.getElementById('date')
 const addFrom = document.getElementById('addForm')
 const productsContainer = document.getElementById('products')
+const addOrderForm = document.getElementById('addOrderForm')
 
 // Métodos
 const currentDate = new Date()
@@ -24,4 +26,8 @@ date.innerText = formattedDate
 // Valida si los elementos existen
 if (addFrom && productsContainer) {
   initInventory()
+}
+
+if (addOrderForm) {
+  initOrders()
 }
