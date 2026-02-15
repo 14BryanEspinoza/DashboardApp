@@ -37,6 +37,7 @@
       src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script type="module" src="Js/main.js" defer></script>
     <!-- Css -->
     <link rel="stylesheet" href="Css/style.css" />
@@ -89,7 +90,13 @@
       </div>
     </nav>
     <!-- Main -->
-    <main></main>
+    <main class="main">
+      <!-- Gráficas -->
+      <div class="container container-fluid">
+        <canvas id="productsChart" class="chart"></canvas>
+        <canvas id="categoriesChart" class="chart"></canvas>
+      </div>
+    </main>
     <!-- Footer -->
     <footer class="footer">
       <p>"Programa no para resolver problemas; sino para crear soluciones"</p>
