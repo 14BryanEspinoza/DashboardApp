@@ -7,36 +7,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Bryan Espinoza" />
-    <meta
-      name="description"
-      content="Este proyecto es para practicar mi habilidades sobre Bootstrap y Sass"
-    />
+    <meta name="description" content="DashboardApp - Gestión de inventario." />
     <meta
       name="keywords"
-      content="DashboardApp, 14BryanEspinoza, Bootstrap, Sass"
+      content="DashboardApp, Inventario, Gestión, Bootstrap"
     />
-    <meta name="robots" content="index, follow" />
-    <meta name="og:title" content="DashboardApp | SPA" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="DashboardApp | Inventario" />
     <meta
-      name="og:description"
-      content="DashboardApp es un proyecto para practicar mi habilidades sobre Bootstrap y Sass"
+      property="og:description"
+      content="Administra tus productos de manera eficiente."
     />
-    <meta name="og:image" content="./Assets/image.png" />
-    <meta name="og:type" content="website" />
-    <meta name="og:url" content="https://AdminDashboard14bz.netlify.app/" />
-    <!-- Tipografía -->
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="../Assets/image.png" />
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Script -->
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Bootstrap -->
     <script
       src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
+    <!-- Scripts -->
     <script type="module" src="../Js/main.js" defer></script>
     <!-- Css -->
     <link rel="stylesheet" href="../Css/style.css" />
@@ -46,154 +47,179 @@
     <title>DashboardApp | Inventario</title>
   </head>
 
-  <!-- Body -->
-  <body>
-    <!-- Nav -->
-    <nav class="navbar navbar-expand-lg">
-      <!-- Container -->
-      <div class="container-fluid">
-        <!-- Logo -->
-        <a href="../index.html" class="navbar-brand">DashboardApp</a>
-        <!-- Button Nav -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+  <body data-theme="light">
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Navegación principal">
+      <a
+        href="../index.html"
+        class="sidebar__brand"
+        aria-label="Ir al inicio de DashboardApp"
+      >
+        <img
+          src="../Assets/icon.png"
+          alt=""
+          width="32"
+          height="32"
+          aria-hidden="true"
+        />
+        <span>DashboardApp</span>
+      </a>
+
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar__nav">
+        <ul class="sidebar__list">
+          <li class="sidebar__item">
+            <a href="../index.html" class="sidebar__link">
+              <i class="bi bi-grid-fill" aria-hidden="true"></i> Panel de
+              Control
+            </a>
+          </li>
+          <li class="sidebar__item">
+            <a
+              href="inventory.html"
+              class="sidebar__link sidebar__link--active"
+              aria-current="page"
+            >
+              <i class="bi bi-box-seam" aria-hidden="true"></i> Inventario
+            </a>
+          </li>
+          <li class="sidebar__item">
+            <a href="orders.html" class="sidebar__link">
+              <i class="bi bi-cart-check" aria-hidden="true"></i> Órdenes
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar__footer">
+        <div
+          id="themeToggle"
+          class="theme-switch"
+          role="button"
+          aria-label="Cambiar entre modo claro y oscuro"
+          tabindex="0"
         >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="../index.html" class="nav-link">Panel de Control</a>
-            </li>
-            <li class="nav-item">
-              <a
-                href="inventory.html"
-                class="nav-link active"
-                aria-current="page"
-                >Inventario</a
-              >
-            </li>
-            <li class="nav-item">
-              <a href="orders.html" class="nav-link">Ordenes</a>
-            </li>
-          </ul>
-          <!-- Date -->
+          <span class="theme-switch__label">Modo Oscuro</span>
+          <span class="theme-switch__icon" aria-hidden="true">🌙</span>
+        </div>
+        <p class="mt-4 text-center small opacity-50">
+          &copy; 2026 Bryan Espinoza
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="container-fluid">
+        <header class="d-flex justify-content-between align-items-center mb-5">
           <div>
-            <p id="date" class="navbar-date">00-00-00</p>
+            <h1 class="h3 mb-0">Inventario</h1>
+            <p id="date" class="text-muted mb-0">Cargando fecha...</p>
+          </div>
+        </header>
+
+        <!-- Formulario para Productos -->
+        <div class="containerFrom">
+          <!-- Container Title -->
+          <div class="tittle-container">
+            <!-- Title -->
+            <h2>Agregar Productos</h2>
+            <!-- Button Add -->
+            <button
+              class="add-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#addForm"
+              aria-controls="addForm"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              +
+            </button>
+          </div>
+          <!-- Formulario -->
+          <div id="addForm" class="fromProduct collapse">
+            <form action="#" class="form">
+              <!-- Name  -->
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productInput"
+                  required
+                  maxlength="50"
+                  placeholder="Nombre del Producto"
+                  aria-label="Nombre del Producto"
+                />
+                <label for="productInput">Nombre del Producto</label>
+              </div>
+              <!-- Category  -->
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="categoryInput"
+                  required
+                  maxlength="50"
+                  placeholder="Nombre de la Categoría"
+                  aria-label="Nombre de la Categoría"
+                />
+                <label for="categoryInput">Nombre de la Categoría</label>
+              </div>
+              <!-- Stock  -->
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stockInput"
+                  required
+                  maxlength="50"
+                  placeholder="Cantidad de Stock"
+                  aria-label="Cantidad de Stock"
+                />
+                <label for="stockInput">Stock</label>
+              </div>
+              <!-- Price  -->
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="priceInput"
+                  required
+                  maxlength="50"
+                  placeholder="Precio del Producto"
+                  aria-label="Precio del Producto"
+                />
+                <label for="priceInput">Precio del Producto</label>
+              </div>
+              <!-- Button  -->
+              <button type="submit" class="btn">Agregar</button>
+            </form>
           </div>
         </div>
-      </div>
-    </nav>
-    <!-- Main -->
-    <main>
-      <!-- Formulario para Productos -->
-      <div class="containerFrom">
-        <!-- Container Title -->
-        <div class="tittle-container">
-          <!-- Title -->
-          <h2>Agregar Productos</h2>
-          <!-- Button Add -->
-          <button
-            class="add-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#addForm"
-            aria-controls="addForm"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            +
-          </button>
+        <!-- Lista de Productos -->
+        <div class="container-products">
+          <!-- Filtro -->
+          <div class="container-filter">
+            <form action="#" id="filterForm">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="filterInput"
+                  aria-label="Buscar"
+                  placeholder="Buscar"
+                  maxlength="50"
+                />
+                <label for="filterInput">Buscar</label>
+              </div>
+              <button type="submit" class="btn">Buscar</button>
+            </form>
+          </div>
+          <!-- Productos -->
+          <div id="products" class="products"></div>
         </div>
-        <!-- Formulario -->
-        <div id="addForm" class="fromProduct collapse">
-          <form action="#" class="form">
-            <!-- Name  -->
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="productInput"
-                required
-                maxlength="50"
-                placeholder="Nombre del Producto"
-                aria-label="Nombre del Producto"
-              />
-              <label for="productInput">Nombre del Producto</label>
-            </div>
-            <!-- Category  -->
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="categoryInput"
-                required
-                maxlength="50"
-                placeholder="Nombre de la Categoría"
-                aria-label="Nombre de la Categoría"
-              />
-              <label for="categoryInput">Nombre de la Categoría</label>
-            </div>
-            <!-- Stock  -->
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="stockInput"
-                required
-                maxlength="50"
-                placeholder="Cantidad de Stock"
-                aria-label="Cantidad de Stock"
-              />
-              <label for="stockInput">Stock</label>
-            </div>
-            <!-- Price  -->
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="priceInput"
-                required
-                maxlength="50"
-                placeholder="Precio del Producto"
-                aria-label="Precio del Producto"
-              />
-              <label for="priceInput">Precio del Producto</label>
-            </div>
-            <!-- Button  -->
-            <button type="submit" class="btn">Agregar</button>
-          </form>
-        </div>
-      </div>
-      <!-- Lista de Productos -->
-      <div class="container-products container-fluid">
-        <!-- Filtro -->
-        <div class="container-filter">
-          <form action="#" id="filterForm">
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="filterInput"
-                aria-label="Buscar"
-                placeholder="Buscar"
-                maxlength="50"
-              />
-              <label for="filterInput">Buscar</label>
-            </div>
-            <button type="submit" class="btn">Buscar</button>
-          </form>
-        </div>
-        <!-- Productos -->
-        <div id="products" class="products"></div>
-        <!-- Pagination -->
       </div>
     </main>
   </body>

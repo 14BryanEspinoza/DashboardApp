@@ -9,35 +9,40 @@
     <meta name="author" content="Bryan Espinoza" />
     <meta
       name="description"
-      content="Este proyecto es para practicar mi habilidades sobre Bootstrap y Sass"
+      content="DashboardApp - Gestión de inventario y órdenes."
     />
     <meta
       name="keywords"
-      content="DashboardApp, 14BryanEspinoza, Bootstrap, Sass"
+      content="DashboardApp, Bootstrap, Sass, Gestión, Inventario"
     />
-    <meta name="robots" content="index, follow" />
-    <meta name="og:title" content="DashboardApp | SPA" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="DashboardApp | Panel de Control" />
     <meta
-      name="og:description"
-      content="DashboardApp es un proyecto para practicar mi habilidades sobre Bootstrap y Sass"
+      property="og:description"
+      content="Práctica de habilidades con Bootstrap y Sass para dashboards modernos."
     />
-    <meta name="og:image" content="./Assets/image.png" />
-    <meta name="og:type" content="website" />
-    <meta name="og:url" content="https://AdminDashboard14bz.netlify.app/" />
-    <!-- Tipografía -->
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./Assets/image.png" />
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Script -->
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Scripts -->
     <script
       src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <!-- Main -->
     <script type="module" src="Js/main.js" defer></script>
     <!-- Css -->
     <link rel="stylesheet" href="Css/style.css" />
@@ -47,66 +52,148 @@
     <title>DashboardApp</title>
   </head>
 
-  <!-- Body -->
-  <body>
-    <!-- Nav -->
-    <nav class="navbar navbar-expand-lg">
-      <!-- Container -->
-      <div class="container-fluid">
-        <!-- Logo -->
-        <a href="index.html" class="navbar-brand">DashboardApp</a>
-        <!-- Button Nav -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+  <body data-theme="light">
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Navegación principal">
+      <a
+        href="index.html"
+        class="sidebar__brand"
+        aria-label="Ir al inicio de DashboardApp"
+      >
+        <img
+          src="Assets/icon.png"
+          alt=""
+          width="32"
+          height="32"
+          aria-hidden="true"
+        />
+        <span>DashboardApp</span>
+      </a>
+
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar__nav">
+        <ul class="sidebar__list">
+          <li class="sidebar__item">
+            <a
+              href="index.html"
+              class="sidebar__link sidebar__link--active"
+              aria-current="page"
+            >
+              <i class="bi bi-grid-fill" aria-hidden="true"></i> Panel de
+              Control
+            </a>
+          </li>
+          <li class="sidebar__item">
+            <a href="Html/inventory.html" class="sidebar__link">
+              <i class="bi bi-box-seam" aria-hidden="true"></i> Inventario
+            </a>
+          </li>
+          <li class="sidebar__item">
+            <a href="Html/orders.html" class="sidebar__link">
+              <i class="bi bi-cart-check" aria-hidden="true"></i> Órdenes
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar__footer">
+        <div
+          id="themeToggle"
+          class="theme-switch"
+          role="button"
+          aria-label="Cambiar entre modo claro y oscuro"
+          tabindex="0"
         >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link active" aria-current="page">
-                Panel de Control
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="Html/inventory.html" class="nav-link">Inventario</a>
-            </li>
-            <li class="nav-item">
-              <a href="Html/orders.html" class="nav-link">Ordenes</a>
-            </li>
-          </ul>
-          <!-- Date -->
-          <div>
-            <p id="date" class="navbar-date">00-00-00</p>
-          </div>
+          <span class="theme-switch__label">Modo Oscuro</span>
+          <span class="theme-switch__icon" aria-hidden="true">🌙</span>
         </div>
+        <p class="mt-4 text-center small opacity-50">
+          &copy; 2026 Bryan Espinoza
+        </p>
       </div>
-    </nav>
+    </aside>
+
     <!-- Main -->
     <main class="main">
-      <!-- Gráficas -->
-      <div class="container container-fluid">
-        <canvas id="productsChart" class="chart"></canvas>
-        <canvas id="categoriesChart" class="chart"></canvas>
+      <!-- Main Container -->
+      <div class="container-fluid">
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center mb-5">
+          <div>
+            <h1 class="h3 mb-0">Bienvenido de nuevo, Bryan</h1>
+            <p id="date" class="text-muted mb-0">Cargando fecha...</p>
+          </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <section class="stats">
+          <div class="stats__card">
+            <span class="stats__label">Total Productos</span>
+            <div class="stats__value" id="kpi-total-products">0</div>
+            <span class="stats__trend stats__trend--up">
+              <i class="bi bi-arrow-up-short"></i> +12% vs mes pasado
+            </span>
+          </div>
+          <div class="stats__card">
+            <span class="stats__label">Stock Total</span>
+            <div class="stats__value" id="kpi-total-stock">0</div>
+            <span class="stats__trend stats__trend--down">
+              <i class="bi bi-arrow-down-short"></i> -5% vs mes pasado
+            </span>
+          </div>
+          <div class="stats__card">
+            <span class="stats__label">Ordenes del Mes</span>
+            <div class="stats__value" id="kpi-total-orders">0</div>
+            <span class="stats__trend stats__trend--up">
+              <i class="bi bi-arrow-up-short"></i> +8% vs mes pasado
+            </span>
+          </div>
+          <div class="stats__card">
+            <span class="stats__label">Ingresos Estimados</span>
+            <div class="stats__value" id="kpi-total-revenue">$0.00</div>
+            <span class="stats__trend stats__trend--up">
+              <i class="bi bi-arrow-up-short"></i> +20% vs mes pasado
+            </span>
+          </div>
+        </section>
+
+        <!-- Main Charts -->
+        <section class="row g-4">
+          <div class="col-xl-8">
+            <div class="chart-card h-100">
+              <h3 class="chart-card__title">Tendencias de Productos</h3>
+              <canvas id="productsChart" height="250"></canvas>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="chart-card h-100">
+              <h3 class="chart-card__title">Distribución por Categorías</h3>
+              <canvas id="categoriesChart" height="250"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="mt-5">
+          <div
+            class="card border-0 shadow-sm p-4"
+            style="background: var(--card-bg); border-radius: 1rem"
+          >
+            <h3 class="h5 mb-4">Actividad Reciente</h3>
+            <div id="recentActivity" class="list-group list-group-flush">
+              <p class="text-muted text-center py-4">
+                No hay actividad reciente registrada.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
+
     <!-- Footer -->
-    <footer class="footer">
-      <p>"Programa no para resolver problemas; sino para crear soluciones"</p>
-      <div class="footer__link">
-        <a href="https://github.com/14BryanEspinoza" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/14bryanespinoza/" target="_blank"
-          >LinkedIn</a
-        >
-      </div>
-      <p>Copyright &copy; 2026 - 14BryanEspinoza</p>
+    <footer class="d-lg-none py-4 text-center">
+      <p class="mb-0 text-muted">DashboardApp &copy; 2026</p>
     </footer>
   </body>
 </html>
