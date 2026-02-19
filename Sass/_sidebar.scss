@@ -1,0 +1,124 @@
+@use 'variables';
+@use 'mixins';
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: map-get(variables.$z-layers, 'sidebar');
+  width: 300px;
+  padding: 2rem 1.5rem;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  transform: translateX(-100%);
+  transition: variables.$transition-smooth;
+  @include mixins.flex(space-between, stretch, column);
+
+  &--open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &__brand {
+    @include mixins.flex(flex-start, center, row, 0.75rem);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: variables.$font-bold;
+    color: var(--primary);
+    margin-bottom: 3rem;
+    transition: variables.$transition-base;
+
+    i {
+      font-size: 1.8rem;
+    }
+
+    &:hover {
+      color: var(--primary-hover);
+      transform: scale(1.02);
+    }
+  }
+
+  &__nav {
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    list-style: none;
+    margin-bottom: 0.75rem;
+  }
+
+  &__link {
+    @include mixins.flex(flex-start, center, row, 1rem);
+    text-decoration: none;
+    padding: 0.8rem 1.25rem;
+    border-radius: 0.8rem;
+    color: var(--text-muted);
+    font-weight: variables.$font-medium;
+    transition: variables.$transition-base;
+
+    i {
+      font-size: 1.25rem;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      background-color: var(--background);
+      color: var(--primary);
+
+      i {
+        transform: scale(1.1);
+      }
+    }
+
+    &--active {
+      background-color: var(--primary);
+      color: var(--text-on-primary);
+      box-shadow: var(--shadow-md);
+
+      &:hover {
+        background-color: var(--primary-hover);
+        color: var(--text-on-primary);
+        transform: none;
+      }
+    }
+  }
+
+  &__footer {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .theme-switch {
+    @include mixins.flex(space-between, center, row);
+    @include mixins.glass(var(--background), 5px);
+    padding: 0.6rem 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: variables.$transition-base;
+
+    span {
+      font-size: 0.85rem;
+      font-weight: variables.$font-medium;
+      color: var(--text-main);
+    }
+
+    &__icon {
+      font-size: 1.2rem;
+    }
+
+    &:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // --- Desktop View ---
+  @include mixins.mq-up('lg') {
+    transform: translateX(0);
+    position: fixed;
+    box-shadow: none;
+  }
+}

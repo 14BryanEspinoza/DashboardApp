@@ -1,0 +1,14 @@
+@use 'variables';
+@use 'mixins';
+
+.main {
+  padding: 1.5rem;
+  transition: variables.$transition-smooth;
+  min-height: 100vh;
+  background-color: var(--background);
+
+  @include mixins.mq-up('lg') {
+    margin-left: 300px;
+    padding: 2.5rem;
+  }
+}

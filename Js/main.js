@@ -207,6 +207,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Carga inicial de datos dashboard
   updateDashboardStats()
+
+  // --- Lógica de Sidebar Mobile ---
+  const sidebar = document.querySelector('.sidebar')
+  const sidebarToggle = document.getElementById('sidebarToggle')
+  const mainContent = document.querySelector('.main')
+
+  if (sidebar && sidebarToggle) {
+    const toggleSidebar = () => {
+      sidebar.classList.toggle('sidebar--open')
+      const isOpen = sidebar.classList.contains('sidebar--open')
+      sidebarToggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+      )
+      sidebarToggle.innerHTML = isOpen
+        ? '<i class="bi bi-x-lg"></i>'
+        : '<i class="bi bi-list"></i>'
+    }
+
+    sidebarToggle.addEventListener('click', (e) => {
+      e.stopPropagation()
+      toggleSidebar()
+    })
+
+    // Cerrar al hacer click en el contenido principal (mobile)
+    if (mainContent) {
+      mainContent.addEventListener('click', () => {
+        if (sidebar.classList.contains('sidebar--open')) {
+          toggleSidebar()
+        }
+      })
+    }
+
+    // Cerrar al presionar Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar.classList.contains('sidebar--open')) {
+        toggleSidebar()
+      }
+    })
+  }
 })
 
 // Listener para actualizaciones automáticas (DRY)
