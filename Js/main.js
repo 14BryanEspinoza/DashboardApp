@@ -1,147 +1,213 @@
+// Importa las funciones de utils.js
+import { formatCurrency } from './utils.js'
+// Importa las funciones de inventory.js
 import { initInventory, loadProduct } from './inventory.js'
-import { initOrders } from './orders.js'
+// Importa las funciones de orders.js
+import { initOrders, loadOrders } from './orders.js'
 
-// Constantes
-const date = document.getElementById('date')
-const addFrom = document.getElementById('addForm')
-const productsContainer = document.getElementById('products')
-const addOrderForm = document.getElementById('addOrderForm')
+// --- Estado Global y Configuración ---
+const THEME_KEY = 'theme'
+const currentTheme = localStorage.getItem(THEME_KEY) || 'light'
 
-// Métodos
-const currentDate = new Date()
+// --- Inicialización de UI Inmediata ---
+document.body.setAttribute('data-theme', currentTheme)
 
-// Manejo de Fecha
-const option = {
-  year: 'numeric',
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-}
-
-const formattedDate = currentDate
-  .toLocaleDateString('es-ES', option)
-  .toUpperCase()
-date.innerText = formattedDate
-
-// Valida si los elementos existen
-if (addFrom && productsContainer) {
-  initInventory()
-}
-
-if (addOrderForm) {
-  initOrders()
-}
-
-// Crea el gráfico de productos stock
-document.addEventListener('DOMContentLoaded', () => {
-  // Constantes
-  const canvas = document.getElementById('productsChart')
-  if (!canvas) return
-
-  // Contexto
-  const ctx = canvas.getContext('2d')
-
-  // LLamamos a la función para cargar los productos
+// Actualiza las estadísticas del dashboard
+const updateDashboardStats = () => {
+  // Carga los productos y las órdenes
   const products = loadProduct()
+  const orders = loadOrders()
 
-  // Ordenamos los productos por stock y tomamos los 3 primeros
-  const top3 = [...products]
-    .sort((a, b) => (a.stock ?? Infinity) - (b.stock ?? Infinity))
-    .slice(0, 3)
+  // Calcula las estadísticas
+  const stats = {
+    products: products.length,
+    stock: products.reduce((acc, p) => acc + (Number(p.stock) || 0), 0),
+    orders: orders.length,
+    revenue: orders.reduce((acc, o) => acc + (Number(o.totalPrice) || 0), 0),
+  }
 
-  // Almacenamos el nombre y el stock de los 3 primeros productos
-  const labels = top3.map((product) => product.name)
-  const data = top3.map((product) => product.stock)
+  // Establece los valores de los KPI
+  const setKPI = (id, value) => {
+    const el = document.getElementById(id)
+    if (el) el.textContent = value
+  }
 
-  // Creamos el gráfico
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Productos con Stock Bajo',
-          data: data,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      aspectRatio: 0.8,
+  // Actualiza los KPI
+  setKPI('kpi-total-products', stats.products)
+  setKPI('kpi-total-stock', stats.stock)
+  setKPI('kpi-total-orders', stats.orders)
+  setKPI('kpi-total-revenue', formatCurrency(stats.revenue))
 
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Stock',
+  // Actualiza la actividad reciente
+  updateRecentActivity(orders)
+  // Actualiza los gráficos
+  updateCharts(products)
+}
+
+// Renderiza la lista de actividad reciente
+const updateRecentActivity = (orders) => {
+  // Obtiene el contenedor de la actividad reciente
+  const container = document.getElementById('recentActivity')
+  if (!container) return
+
+  // Si no hay órdenes, muestra un mensaje
+  if (orders.length === 0) {
+    container.innerHTML =
+      '<p class="text-muted text-center py-4">No hay actividad reciente registrada.</p>'
+    return
+  }
+
+  // Ordena las órdenes por fecha
+  const recent = [...orders].reverse().slice(0, 5)
+
+  // Renderiza la lista de actividad reciente
+  container.innerHTML = recent
+    .map(
+      (order) => `
+    <div class="list-group-item bg-transparent border-0 px-0 py-3 d-flex justify-content-between align-items-center border-bottom">
+      <div class="d-flex align-items-center gap-3">
+        <div class="bg-primary bg-opacity-10 p-2 rounded-circle">
+          <i class="bi bi-cart-check text-primary"></i>
+        </div>
+        <div>
+          <h6 class="mb-0 text-main">${order.client}</h6>
+          <small class="text-muted">${order.product} (${order.stock} uds)</small>
+        </div>
+      </div>
+      <div class="text-end">
+        <div class="fw-bold text-main">${formatCurrency(order.totalPrice)}</div>
+      </div>
+    </div>
+  `
+    )
+    .join('')
+}
+
+// Manejo de Gráficos (Chart.js)
+let productsChart, categoriesChart
+
+// Actualiza los gráficos
+const updateCharts = (products) => {
+  const productsCtx = document.getElementById('productsChart')?.getContext('2d')
+  const categoriesCtx = document
+    .getElementById('categoriesChart')
+    ?.getContext('2d')
+
+  // Actualiza el gráfico de productos
+  if (productsCtx) {
+    if (productsChart) productsChart.destroy()
+
+    // Ordena los productos por stock
+    const lowStock = [...products].sort((a, b) => a.stock - b.stock).slice(0, 5)
+
+    // Crea el gráfico de productos
+    productsChart = new Chart(productsCtx, {
+      type: 'bar',
+      data: {
+        labels: lowStock.map((p) => p.name),
+        datasets: [
+          {
+            label: 'Stock Actual',
+            data: lowStock.map((p) => p.stock),
+            backgroundColor: '#3b82f6',
           },
-        },
+        ],
       },
-    },
-  })
-})
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } },
+      },
+    })
+  }
 
-// Crea el gráfico de categorías
+  // Actualiza el gráfico de categorías
+  if (categoriesCtx) {
+    if (categoriesChart) categoriesChart.destroy()
+
+    // Cuenta las categorías
+    const categoryCounts = products.reduce((acc, p) => {
+      acc[p.category] = (acc[p.category] || 0) + 1
+      return acc
+    }, {})
+
+    // Crea el gráfico de categorías
+    categoriesChart = new Chart(categoriesCtx, {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(categoryCounts),
+        datasets: [
+          {
+            data: Object.values(categoryCounts),
+            backgroundColor: [
+              '#3b82f6',
+              '#8b5cf6',
+              '#ec4899',
+              '#f97316',
+              '#10b981',
+              '#64748b',
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        cutout: '70%',
+        animation: { animateRotate: true, animateScale: true },
+      },
+    })
+  }
+}
+
+// Manejo de la fecha
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas2 = document.getElementById('categoriesChart')
-  if (!canvas2) return
+  // Obtiene la fecha
+  const dateEl = document.getElementById('date')
 
-  // Cargamos los productos
-  const products = loadProduct()
-  // Obtenemos el contexto del canvas
-  const ctx2 = canvas2.getContext('2d')
+  // Actualiza la fecha
+  if (dateEl) {
+    dateEl.textContent = new Intl.DateTimeFormat('es-ES', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+      .format(new Date())
+      .toUpperCase()
+  }
 
-  // Obtenemos las categorías únicas
-  const categories = Array.from(
-    new Set(products.map((product) => product.category))
-  )
+  // Toggle de Tema
+  const themeToggle = document.getElementById('themeToggle')
 
-  // Contamos cuántos productos hay en cada categoría
-  const data2 = categories.map((category) => {
-    return products.filter((product) => product.category === category).length
-  })
+  // Actualiza el toggle de tema
+  if (themeToggle) {
+    // Obtiene el icono del toggle
+    const icon = themeToggle.querySelector('.theme-switch__icon')
 
-  // Creamos el gráfico
-  new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-      labels: categories,
-      datasets: [
-        {
-          label: 'Categorías',
-          data: data2,
-          backgroundColor: [
-            '#007bff',
-            '#6f42c1',
-            '#e83e8c',
-            '#dc3545',
-            '#fd7e14',
-            '#ffc107',
-            '#28a745',
-            '#17a2b8',
-            '#6c757d',
-            '#000000',
-          ],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      aspectRatio: 1,
-      plugins: {
-        legend: {
-          position: 'bottom',
-        },
-      },
-      layout: {
-        padding: 20,
-      },
-      cutout: '50%',
-      animation: {
-        animateRotate: true,
-        animateScale: true,
-      },
-    },
-  })
+    // Actualiza el icono del toggle
+    icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙'
+
+    // Event listener para el toggle de tema
+    themeToggle.addEventListener('click', () => {
+      // Verifica si el tema actual es oscuro
+      const isDark = document.body.getAttribute('data-theme') === 'dark'
+      const nextTheme = isDark ? 'light' : 'dark'
+
+      // Actualiza el tema
+      document.body.setAttribute('data-theme', nextTheme)
+      localStorage.setItem(THEME_KEY, nextTheme)
+      icon.textContent = nextTheme === 'dark' ? '☀️' : '🌙'
+    })
+  }
+
+  // Inicializa los módulos de página
+  if (document.getElementById('addForm')) initInventory()
+  if (document.getElementById('addOrderForm')) initOrders()
+
+  // Carga inicial de datos dashboard
+  updateDashboardStats()
 })
+
+// Listener para actualizaciones automáticas (DRY)
+window.addEventListener('statsUpdated', updateDashboardStats)

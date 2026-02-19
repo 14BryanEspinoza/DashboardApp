@@ -1,185 +1,160 @@
+// Importar funciones de utils.js
+import { Storage, createCard } from './utils.js'
+// Importar funciones de inventory.js
 import { loadProduct, saveProduct } from './inventory.js'
 
+// Clave de almacenamiento
+const STORAGE_KEY = 'orders'
+
+// Devuelve las órdenes de local storage
+export const loadOrders = () => Storage.get(STORAGE_KEY)
+
+// Guarda las órdenes en local storage
+export const saveOrders = (orders) => Storage.set(STORAGE_KEY, orders)
+
+// Inicializa las órdenes
 export const initOrders = () => {
   // Constantes
   const addOrderForm = document.getElementById('addOrderForm')
   const itemInput = document.getElementById('itemInput')
   const priceProductInput = document.getElementById('priceProductInput')
-  const productsContainer = document.getElementById('orders')
-  const windowSize = window.innerWidth
-  const products = loadProduct()
-  const STORAGE_KEYS = 'orders'
+  const stockInput = document.getElementById('stockInput')
+  const totalPriceInput = document.getElementById('totalPriceInput')
+  const ordersContainer = document.getElementById('orders')
 
-  // Cargar Ordenes del localStorage
-  const loadOrders = () => {
-    const item = localStorage.getItem(STORAGE_KEYS)
+  // Si no hay elementos, retorna
+  if (!addOrderForm || !ordersContainer) return
 
-    // Si no hay colección, retorna un array vacío
-    if (!item) return []
+  // Carga los datos
+  let products = loadProduct()
+  let orders = loadOrders()
 
-    try {
-      // Si el JSON es válido, retorna el array
-      return JSON.parse(item)
-    } catch (e) {
-      // Si el JSON se daña, retorna un array vacío
-      return []
-    }
-  }
-
-  // Guardar Ordenes en el localStorage
-  const saveOrders = (orders) => {
-    localStorage.setItem(STORAGE_KEYS, JSON.stringify(orders))
-  }
-
-  // Eliminar Orden del localStorage
-  const removeOrder = (id) => {
-    // Seleccionamos todos los productos menos el que queremos eliminar
-    orders = orders.filter((item) => item.id !== id)
-
-    saveOrders(orders)
-    renderOrders()
-  }
-
-  // Agregar Orden en el localStorage
-  const addOrder = (client, product, stock, totalPrice) => {
-    // Creamos el nuevo producto
-    const newOrder = { id: Date.now(), client, product, stock, totalPrice }
-
-    // Agregar el nuevo producto
-    orders.push(newOrder)
-
-    saveOrders(orders)
-    renderOrders()
-  }
-
-  // Lógica para el select options
-  const inputOptions = () => {
-    // Mapear los productos para almacenarlos en el option
-    const options = products
-      .map(
-        (product) => `<option value="${product.id}">${product.name}</option>`
-      )
-      .join('')
-
-    // Insertar opciones en el select
-    return (itemInput.innerHTML = options)
-  }
-
-  // Lógica para el precio del producto
-  const priceProduct = () => {
-    // constantes
-    const stockInput = document.getElementById('stockInput')
-    const totalPriceInput = document.getElementById('totalPriceInput')
-
-    // Obtener el valor del input
-    const value = itemInput.value
-
-    // Encontrar el producto correspondiente
-    const product = products.find((product) => product.id === parseInt(value))
-
-    // Establecer el precio del producto
-    priceProductInput.value = product.price
-
-    const total = Number(product.price) * Number(stockInput.value)
-
-    // Establecer el precio total
-    totalPriceInput.value = total.toFixed(2)
-
-    // Escuchar el cambio del input
-    itemInput.addEventListener('change', priceProduct)
-    stockInput.addEventListener('change', priceProduct)
-  }
-
+  // Renderiza las órdenes
   const renderOrders = (list = orders) => {
-    // Limpiamos el contenedor
-    productsContainer.innerHTML = ''
+    // Limpia el contenedor
+    ordersContainer.innerHTML = ''
 
-    // Creamos los componentes de la card
+    // Si no hay órdenes, muestra un mensaje
+    if (list.length === 0) {
+      ordersContainer.innerHTML =
+        '<p class="text-muted text-center w-100 py-5">No hay órdenes registradas.</p>'
+      return
+    }
+
+    // Recorre las órdenes y crea una tarjeta para cada una
     list.forEach((order) => {
-      const divCard = document.createElement('div')
-      const divCardHeader = document.createElement('div')
-      const divCardBody = document.createElement('div')
-      const divCardFooter = document.createElement('div')
-      const btnDelete = document.createElement('button')
-      const title = document.createElement('h2')
-      const category = document.createElement('p')
-      const stock = document.createElement('p')
-      const price = document.createElement('span')
-
-      title.textContent = order.client
-      category.textContent = `Articulo: ${order.product}`
-      stock.textContent = `Cantidad: ${order.stock}`
-      price.textContent = `$${order.totalPrice}`
-      btnDelete.textContent = 'Eliminar'
-
-      divCard.className = 'card'
-      divCardHeader.className = 'card-header'
-      divCardBody.className = 'card-body'
-      divCardFooter.className = 'card-footer'
-      btnDelete.className = 'btn btn-danger'
-
-      btnDelete.addEventListener('click', () => removeOrder(order.id))
-
-      divCardHeader.appendChild(title)
-      divCardHeader.appendChild(price)
-      divCardBody.appendChild(stock)
-      divCardBody.appendChild(category)
-      divCardFooter.appendChild(btnDelete)
-      divCard.appendChild(divCardHeader)
-      divCard.appendChild(divCardBody)
-      divCard.appendChild(divCardFooter)
-
-      productsContainer.appendChild(divCard)
+      const card = createCard({
+        title: order.client,
+        price: order.totalPrice,
+        details: [`Artículo: ${order.product}`, `Cantidad: ${order.stock}`],
+        onDelete: () => removeOrder(order.id),
+      })
+      ordersContainer.appendChild(card)
     })
   }
 
-  // Obtenemos los datos del formulario
-  addOrderForm.addEventListener('submit', function (e) {
-    // Impide la recarga de la pagina
-    e.preventDefault()
+  // Elimina una orden
+  const removeOrder = (id) => {
+    // Filtra las órdenes y elimina la que tenga el id proporcionado
+    orders = orders.filter((o) => o.id !== id)
 
-    // Datos del Producto
-    const client = document.getElementById('clientInput').value
-    const item = document.getElementById('itemInput').value
-    const stockInput = document.getElementById('stockInput')
-    const stock = Number(stockInput.value)
-    const totalPrice = document.getElementById('totalPriceInput').value
+    saveOrders(orders)
+    renderOrders()
 
-    // Encontrar el producto correspondiente
-    const product = products.find((product) => product.id === parseInt(item))
-
-    if (Number(product.stock) < stock) {
-      // No agregamos la orden porque no hay suficiente stock
-      stockInput.classList.add('is-invalid')
-      stockInput.setCustomValidity('No hay suficiente stock')
-    } else {
-      // Actualizamos el stock del producto
-      stockInput.classList.remove('is-invalid')
-      stockInput.setCustomValidity('')
-      product.stock = Number(product.stock) - stock
-      saveProduct(products)
-
-      // Agregamos el producto
-      addOrder(client, product.name, stock, totalPrice)
-
-      // Limpiamos el formulario
-      document.getElementById('clientInput').value = ''
-      document.getElementById('itemInput').value = ''
-      document.getElementById('stockInput').value = ''
-      document.getElementById('totalPriceInput').value = ''
-    }
-  })
-
-  // Media Queries
-  if (windowSize >= 1024) {
-    addOrderForm.classList.add('show')
-  } else {
-    addOrderForm.classList.remove('show')
+    // Dispara el evento statsUpdated
+    window.dispatchEvent(new CustomEvent('statsUpdated'))
   }
 
-  // Initialization
-  let orders = loadOrders()
-  inputOptions()
-  priceProduct()
+  // Llena las opciones del select con los productos
+  const populateProductOptions = () => {
+    // Si no hay itemInput, retorna
+    if (!itemInput) return
+
+    // Crea las opciones del select
+    const options = products
+      .map(
+        (p) => `<option value="${p.id}">${p.name} (Stock: ${p.stock})</option>`
+      )
+      .join('')
+
+    // Actualiza el select con las opciones
+    itemInput.innerHTML = `<option value="" selected disabled>Seleccione un producto</option>${options}`
+  }
+
+  // Actualiza los precios de la orden
+  const updateOrderPrices = () => {
+    // Obtiene el id del producto
+    const productId = parseInt(itemInput.value)
+    const product = products.find((p) => p.id === productId)
+
+    // Si hay un producto, actualiza los precios
+    if (product) {
+      const quantity = parseInt(stockInput.value) || 0
+      priceProductInput.value = product.price
+      totalPriceInput.value = (product.price * quantity).toFixed(2)
+
+      // Si la cantidad es mayor al stock, muestra un mensaje de error
+      if (quantity > product.stock) {
+        stockInput.classList.add('is-invalid')
+      } else {
+        stockInput.classList.remove('is-invalid')
+      }
+    }
+  }
+
+  // Event Listeners
+  if (itemInput) itemInput.addEventListener('change', updateOrderPrices)
+  if (stockInput) stockInput.addEventListener('input', updateOrderPrices)
+
+  // Event Listener para el formulario de órdenes
+  addOrderForm.addEventListener('submit', (e) => {
+    // Previene el comportamiento por defecto del formulario
+    e.preventDefault()
+
+    // Obtiene los datos del formulario
+    const productId = parseInt(itemInput.value)
+    const quantity = parseInt(stockInput.value)
+    const client = document.getElementById('clientInput').value.trim()
+
+    // Busca el producto
+    const product = products.find((p) => p.id === productId)
+
+    // Si no hay producto, cantidad mayor al stock o cliente vacío, muestra un mensaje de error
+    if (!product || quantity > product.stock || !client) {
+      stockInput.classList.add('is-invalid')
+      return
+    }
+
+    // Procesa la orden
+    const totalPrice = product.price * quantity
+    const newOrder = {
+      id: Date.now(),
+      client,
+      product: product.name,
+      stock: quantity,
+      totalPrice,
+    }
+
+    // Agrega la orden al array de órdenes
+    orders.push(newOrder)
+    product.stock -= quantity
+
+    // Guarda las órdenes y los productos
+    saveOrders(orders)
+    saveProduct(products)
+
+    // Resetea el formulario
+    addOrderForm.reset()
+
+    // Renderiza las órdenes y actualiza los productos
+    renderOrders()
+    populateProductOptions()
+
+    // Dispara el evento statsUpdated
+    window.dispatchEvent(new CustomEvent('statsUpdated'))
+  })
+
+  // Render inicial
+  populateProductOptions()
   renderOrders()
 }
