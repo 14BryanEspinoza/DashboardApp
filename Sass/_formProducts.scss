@@ -1,124 +1,84 @@
-// Imports
 @use 'variables';
 @use 'mixins';
 
-// Style Mobile
 .containerFrom {
-  margin: 0.5rem auto;
-  padding: 0.5rem;
-  border-top: 2px solid variables.$border-color;
-  border-bottom: 2px solid variables.$border-color;
-  background-color: variables.$background-card;
+  @include mixins.glass;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  transition: variables.$transition-base;
 
-  // Container Tittle
   .tittle-container {
-    @include mixins.display-flex($display: flex, $gap: 0.5rem);
+    @include mixins.flex(space-between, center, row, 1rem);
+    margin-bottom: 1.5rem;
 
-    // Tittle
     h2 {
-      font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 1.25rem;
+      font-weight: variables.$font-bold;
+      color: var(--text-main);
       margin: 0;
     }
 
-    // Button Add
     .add-toggler {
-      padding: 0.1rem 0.5rem;
+      padding: 0.4rem 1rem;
       border-radius: 0.5rem;
-      font-size: 0.8rem;
-      color: #fff;
-      border: 2px solid variables.$primary;
-      background-color: variables.$primary;
+      font-weight: variables.$font-bold;
+      color: var(--text-on-primary);
+      background-color: var(--primary);
+      border: none;
+      transition: variables.$transition-base;
 
       &:hover {
-        background-color: variables.$primary;
+        background-color: var(--primary-hover);
+        transform: scale(1.05);
       }
     }
   }
 
-  // Container
   .fromProduct {
-    margin-top: 0.5rem;
-
-    // Formulario
     .form {
-      text-align: center;
-
-      // Container Input
       .form-floating {
-        font-size: 0.8rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
 
-        // Input
         .form-control {
-          min-height: auto;
-          height: auto;
-          font-size: 0.8rem;
-          padding: 0.8rem 0.5rem;
+          background-color: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--border-color);
+          border-radius: 0.5rem;
+          color: var(--text-main);
+          transition: variables.$transition-base;
 
           &:focus {
-            outline: none;
-            box-shadow: none;
-            border-color: variables.$primary;
-          }
-
-          &:invalid {
-            border-color: variables.$danger;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(var(--primary), 0.1);
           }
         }
 
-        // Label
         label {
-          font-size: 0.8rem;
-          padding: 0.5rem;
+          color: var(--text-muted);
         }
       }
 
-      // Button Submit
-      button {
-        font-size: 0.8rem;
-        color: #fff;
-        background-color: variables.$text-secondary;
+      .btn {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: var(--primary);
+        color: var(--text-on-primary);
+        font-weight: variables.$font-bold;
+        border-radius: 0.5rem;
+        transition: variables.$transition-base;
+
+        &:hover {
+          background-color: var(--primary-hover);
+          box-shadow: var(--shadow-md);
+        }
       }
     }
   }
-}
 
-// Style Desktop
-@media screen and (min-width: 1024px) {
-  .containerFrom {
-    @include mixins.position-absolute(
-      $top: 0,
-      $right: 0,
-      $width: 15%,
-      $height: 45dvh
-    );
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    border: 2px solid variables.$border-color;
-    box-shadow: 2px 0 2px variables.$shadow-default;
-
-    // Container Tittle
-    .tittle-container {
-      margin-top: 0.5rem;
-
-      // Button Add
-      .add-toggler {
-        display: none;
-      }
-    }
-
-    // Container
-    .fromProduct {
-      // Formulario
-      .form {
-        // Button Submit
-        button {
-          &:hover {
-            background-color: variables.$primary;
-          }
-        }
-      }
-    }
+  // Desktop refinements
+  @include mixins.mq-up('lg') {
+    // En desktop el formulario puede ser más compacto lateralmente
+    // o integrarse en una columna de grid en el Dashboard principal.
   }
 }

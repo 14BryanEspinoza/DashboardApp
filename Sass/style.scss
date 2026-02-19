@@ -5,11 +5,11 @@
 @forward 'bootstrap';
 @forward 'sidebar';
 @forward 'layout';
-// @forward 'stats';
-// @forward 'formProducts';
-// @forward 'products';
+@forward 'stats';
+@forward 'formProducts';
+@forward 'products';
 // @forward 'formOrder';
-// @forward 'gráficas';
+@forward 'gráficas';
 
 // --- Estilos Base Globales ---
 html {

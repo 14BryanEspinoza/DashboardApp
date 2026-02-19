@@ -1,174 +1,114 @@
-// Import
 @use 'variables';
 @use 'mixins';
 
-// Style Mobile
 .container-products {
-  // Container Filter
   .container-filter {
-    // Form
+    margin-bottom: 2rem;
+
     form {
-      display: flex;
-      gap: 0.5rem;
+      @include mixins.flex(flex-start, center, row, 1rem);
 
-      // Container Input
       .form-floating {
-        font-size: 0.8rem;
+        flex-grow: 1;
+        max-width: 400px;
 
-        // Input
         .form-control {
-          min-height: auto;
-          height: auto;
-          padding: 0.5rem;
+          border-radius: 0.5rem;
+          border: 1px solid var(--border-color);
+          background-color: var(--sidebar-bg);
+          color: var(--text-main);
 
           &:focus {
-            outline: none;
-            box-shadow: none;
-            border-color: variables.$primary;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(var(--primary), 0.1);
           }
-
-          &:invalid {
-            border-color: variables.$danger;
-          }
-        }
-
-        // Label
-        label {
-          padding: 0.5rem;
-          font-size: 0.8rem;
         }
       }
 
-      // Button Submit
-      button {
-        font-size: 0.8rem;
-        color: #fff;
-        background-color: variables.$text-secondary;
+      .btn {
+        padding: 0.8rem 1.5rem;
+        background-color: var(--primary);
+        color: var(--text-on-primary);
+        border-radius: 0.5rem;
+        font-weight: variables.$font-bold;
+        transition: variables.$transition-base;
+
+        &:hover {
+          background-color: var(--primary-hover);
+          box-shadow: var(--shadow-sm);
+        }
       }
     }
   }
 
-  // Lista de Productos
   .products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.5rem;
-    margin: 0.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
 
     .card {
+      @include mixins.card-premium;
+      height: 100%;
+      @include mixins.flex(space-between, stretch, column);
+
       &-header {
-        display: flex;
-        justify-content: space-between;
+        @include mixins.flex(space-between, flex-start, row, 1rem);
+        margin-bottom: 1rem;
 
         h2 {
-          font-weight: bold;
-          font-size: 0.8rem;
+          font-size: 1.1rem;
+          font-weight: variables.$font-bold;
+          color: var(--text-main);
           margin: 0;
         }
 
-        span {
-          font-size: 0.7rem;
+        .badge {
+          font-size: 0.75rem;
+          padding: 0.4em 0.8em;
+          border-radius: 2rem;
+          background-color: rgba(var(--primary), 0.1);
+          color: var(--primary);
         }
       }
 
       &-body {
+        margin-bottom: 1.5rem;
+
         p {
-          margin: 0;
-          font-size: 0.8rem;
+          @include mixins.flex(space-between, center);
+          margin-bottom: 0.5rem;
+          font-size: 0.9rem;
+          color: var(--text-muted);
+
+          strong {
+            color: var(--text-main);
+          }
+        }
+
+        .price {
+          font-size: 1.25rem;
+          font-weight: variables.$font-bold;
+          color: var(--primary);
+          margin-top: 1rem;
         }
       }
 
       &-footer {
-        text-align: center;
+        @include mixins.flex(flex-end, center);
 
-        .btn {
-          font-size: 0.8rem;
-          border: 1px solid variables.$warning;
-          background-color: variables.$warning;
-        }
-      }
-    }
-  }
-}
-
-// Style Desktop
-@media screen and (min-width: 1024px) {
-  .container-products {
-    @include mixins.position-absolute(
-      $top: 0,
-      $left: 21%,
-      $width: 62%,
-      $height: 97dvh
-    );
-    margin: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    border: 2px solid variables.$border-color;
-    box-shadow: 2px 0 2px variables.$shadow-default;
-
-    // Container Filter
-    .container-filter {
-      // Form
-      form {
-        @include mixins.display-flex(row, center, center, wrap, 0.5rem);
-
-        // Container Input
-        .form-floating {
-          // Input
-          .form-control {
-            min-height: auto;
-            height: auto;
-            padding: 0.5rem;
-
-            &:focus {
-              outline: none;
-              box-shadow: none;
-              border-color: variables.$primary;
-            }
-
-            &:invalid {
-              border-color: variables.$danger;
-            }
-          }
-
-          // Label
-          label {
-            padding: 0.5rem;
-            font-size: 0.8rem;
-          }
-        }
-
-        // Button Submit
-        button {
-          font-size: 0.8rem;
-          color: #fff;
-          background-color: variables.$text-secondary;
+        .btn-delete {
+          @include mixins.flex(center, center, row, 0.5rem);
+          padding: 0.5rem 1rem;
+          font-size: 0.85rem;
+          color: var(--danger);
+          background: transparent;
+          border: 1px solid transparent;
+          border-radius: 0.5rem;
+          transition: variables.$transition-base;
 
           &:hover {
-            background-color: variables.$primary;
-          }
-        }
-      }
-    }
-
-    // Lista de Productos
-    .products {
-      overflow-y: scroll;
-      max-height: 80vh;
-
-      .card {
-        &-header {
-          h2 {
-            width: 60%;
-          }
-        }
-
-        &-footer {
-          .btn {
-            &:hover {
-              background-color: variables.$danger;
-            }
+            background-color: rgba(var(--danger), 0.1);
+            border-color: var(--danger);
           }
         }
       }
