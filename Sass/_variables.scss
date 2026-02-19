@@ -1,36 +1,81 @@
+// --- Design Tokens (CSS Variables) ---
+:root {
+  // Colors
+  --primary: #2563eb;
+  --primary-hover: #1e40af;
+  --secondary: #64748b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #06b6d4;
+
+  // Backgrounds
+  --background: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --sidebar-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+
+  // Text
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-on-primary: #ffffff;
+
+  // Borders & Shadows
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+[data-theme='dark'] {
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --secondary: #94a3b8;
+  --background: #0f172a;
+  --card-bg: rgba(30, 41, 59, 0.85);
+  --sidebar-bg: #1e293b;
+  --glass-bg: rgba(30, 41, 59, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
 // Typography
-$font-family: 'Inter', sans-serif;
+$font-family:
+  'Inter',
+  system-ui,
+  -apple-system,
+  sans-serif;
+$font-black: 900;
+$font-bold: 700;
+$font-medium: 500;
+$font-regular: 400;
 
-// Brand
-$primary: #2563eb;
-$secondary: #64748b;
+// Breakpoints (Bootstrap Standard)
+$breakpoints: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px,
+);
 
-// Backgrounds
-$background-default: #f8fafc;
-$background-card: #ffffff;
-$background-subtle: #f1f5f9;
-$background-soft: #e0f2fe;
-$background-dark: #0f172a;
+// Transitions
+$transition-fast: all 0.2s ease;
+$transition-base: all 0.3s ease;
+$transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-// Text colors
-$text-default: #0f172a;
-$text-secondary: #475569;
-$text-muted: #94a3b8;
-
-// Border Colors
-$border-color: #e2e8f0;
-$border-hover-color: #d1d5db;
-
-// Shadow colors
-$shadow-default: rgba(90, 105, 120, 0.1);
-$shadow-hover: rgba(90, 105, 120, 0.25);
-
-// States
-$success: #16a34a;
-$warning: #f59e0b;
-$danger: #dc2626;
-$info: #0ea5e9;
-
-// Links
-$link-color: $primary;
-$link-hover-color: #1e40af;
+// Z-index scale
+$z-layers: (
+  'base': 1,
+  'dropdown': 100,
+  'sticky': 200,
+  'sidebar': 300,
+  'modal': 400,
+  'tooltip': 500,
+);
