@@ -36,7 +36,7 @@ pnpm run watch
 
 ## 🔗 Demo
 
-[Ver sitio en vivo](https://AdminDashboard14bz.netlify.app/)
+[Ver sitio en vivo](https://dashboardapp14bz.netlify.app/)
 
 ## 📊 Estado del Proyecto
 
