@@ -62,18 +62,13 @@
           margin: 0;
         }
 
-        .badge {
+        .card-price {
           font-size: 0.75rem;
-          padding: 0.4em 0.8em;
-          border-radius: 2rem;
-          background-color: rgba(var(--primary), 0.1);
-          color: var(--primary);
+          color: var(--text-main);
         }
       }
 
       &-body {
-        margin-bottom: 1.5rem;
-
         p {
           @include mixins.flex(space-between, center);
           margin-bottom: 0.5rem;

@@ -1,55 +1,70 @@
-# DashboardApp
+# DashboardApp - 14BryanEspinoza
 
-Dashboard administrativo para visualización de datos con gráficas interactivas. Proyecto de práctica enfocado en Bootstrap y Sass.
+## 📋 Descripción del Proyecto
 
-## 🛠️ Tecnologías
+Dashboard administrativo de alto rendimiento diseñado para la gestión eficiente de inventarios y órdenes.
 
-- HTML5
-- CSS3 / Sass
-- JavaScript
-- Bootstrap 5.3
-- Chart.js
-- pnpm
+- **Diseño Glassmorphism**: Interfaz moderna con efectos de cristal sutiles, sombras dinámicas y transiciones suaves.
+- **Arquitectura Mobile-First**: Optimizado totalmente para dispositivos móviles con un Sidebar lateral colapsable e interactivo.
+- **Gestión Reactiva**: KPIs dinámicos (Stock, Ingresos, Productos) que se actualizan en tiempo real mediante un sistema de eventos.
+- **Modo Oscuro Nativo**: Soporte completo para temas Claro/Oscuro persistente mediante variables CSS (Tokens de diseño).
+- **Módulos de Gestión**:
+  - **Inventario**: Control total de productos, categorías y precios.
+  - **Órdenes**: Sistema de ventas con validación automática de stock.
+- **Visualización de Datos**: Gráficas interactivas con **Chart.js** sincronizadas con los datos de la aplicación.
 
-## 📋 Requisitos
+## 🛠️ Stack Tecnológico
 
-- Node.js (v18 o superior)
-- pnpm
+- **HTML5**: Semántica estricta y accesibilidad (A11y/ARIA).
+- **CSS3 / Sass**: Arquitectura modular basada en `@use`, BEM estricto, Mixins reutilizables y Design Tokens.
+- **JavaScript (ES6+)**: Lógica desacoplada, módulos de utilidad para `localStorage` y manejo defensivo de datos.
+- **Bootstrap 5.3**: Utilidades de layout y componentes base optimizados.
+- **Chart.js**: Visualización dinámica de tendencias y categorías.
 
-## 🚀 Instalación y Comandos
+## 🔧 Requisitos
+
+- **Node.js**: v18 o superior.
+- **Package Manager**: pnpm (recomendado) o npm.
+
+## 🚀 Instalación y Desarrollo
 
 ```bash
-# Instalar dependencias
+# 1. Instalar dependencias
 pnpm install
 
-# Compilar Sass
-pnpm run build
-
-# Compilar Sass en modo watch
+# 2. Compilar Sass en modo desarrollo (Watch)
 pnpm run watch
+
+# 3. Compilar para producción
+pnpm run build
 ```
 
-## 📸 Captura
+## 📸 Vista previa
 
-<!-- Agregar captura de pantalla aquí -->
-![DashboardApp Screenshot](Assets/image.png)
+![Vista previa de DashboardApp](Assets/preview.png)
 
-## 🔗 Demo
+## 🔗 Enlace del proyecto
 
-[Ver sitio en vivo](https://dashboardapp14bz.netlify.app/)
-
-## 📊 Estado del Proyecto
-
-✅ En desarrollo activo
-
-## 🔮 Mejoras Futuras
-
-- [ ] Agregar más tipos de gráficas
-- [ ] Implementar modo oscuro
-- [ ] Añadir filtros de datos
-- [ ] Exportar reportes en PDF
-- [ ] Mejorar responsividad en dispositivos móviles
+- **Sitio en vivo**: [Ver Proyecto](https://dashboardapp14bz.netlify.app/)
 
 ---
 
-Desarrollado por [14BryanEspinoza](https://github.com/14BryanEspinoza)
+## 📊 Estado del Proyecto
+
+- [x] Diseño Glassmorphism
+- [x] Arquitectura Mobile-First
+- [x] Gestión Reactiva
+- [x] Modo Oscuro Nativo
+- [x] Módulos de Gestión
+- [x] Visualización de Datos
+
+**Próximos Pasos**:
+
+- Implementar sistema de autenticación.
+- Agregar soporte para múltiples idiomas.
+- Integrar con base de datos remota.
+- Implementar sistema de notificaciones.
+- Agregar soporte para múltiples idiomas.
+- Integrar con base de datos remota.
+
+### Desarrollado por Bryan Espinoza - 2026

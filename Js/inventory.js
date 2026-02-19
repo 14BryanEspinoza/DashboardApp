@@ -106,7 +106,10 @@ export const initInventory = () => {
     addProduct(name, category, stock, price)
 
     // Limpia el formulario
-    addForm.reset()
+    document.getElementById('productInput').value = ''
+    document.getElementById('categoryInput').value = ''
+    document.getElementById('stockInput').value = ''
+    document.getElementById('priceInput').value = ''
   })
 
   // Filtra los productos

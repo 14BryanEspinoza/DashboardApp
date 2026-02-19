@@ -144,7 +144,11 @@ export const initOrders = () => {
     saveProduct(products)
 
     // Resetea el formulario
-    addOrderForm.reset()
+    document.getElementById('clientInput').value = ''
+    document.getElementById('itemInput').value = ''
+    document.getElementById('stockInput').value = ''
+    document.getElementById('priceProductInput').value = ''
+    document.getElementById('totalPriceInput').value = ''
 
     // Renderiza las órdenes y actualiza los productos
     renderOrders()

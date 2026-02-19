@@ -12266,15 +12266,9 @@ textarea.form-control-lg {
   color: var(--text-main);
   margin: 0;
 }
-.container-products .products .card-header .badge {
+.container-products .products .card-header .card-price {
   font-size: 0.75rem;
-  padding: 0.4em 0.8em;
-  border-radius: 2rem;
-  background-color: rgba(var(--primary), 0.1);
-  color: var(--primary);
-}
-.container-products .products .card-body {
-  margin-bottom: 1.5rem;
+  color: var(--text-main);
 }
 .container-products .products .card-body p {
   display: flex;
@@ -12369,6 +12363,11 @@ textarea.form-control-lg {
   border-radius: 0.5rem;
   color: var(--text-main);
   transition: all 0.3s ease;
+}
+.containerFromOrder .formOrder .form .form-floating .form-control option,
+.containerFromOrder .formOrder .form .form-floating .form-select option {
+  color: var(--text-main);
+  background-color: var(--background);
 }
 .containerFromOrder .formOrder .form .form-floating .form-control:focus,
 .containerFromOrder .formOrder .form .form-floating .form-select:focus {
